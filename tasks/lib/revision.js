@@ -8,7 +8,6 @@ module.exports = function(file){
 			if(error){
 				reject(error)
 			} else {
-				console.log(result.stdout)
 				resolve(result.stdout)
 			}
 		})
