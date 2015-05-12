@@ -1,6 +1,6 @@
 # grunt-gemini
 
-> A grunt gplugin got git revision
+> A grunt gplugin got git revision. You have to install this plugin where the .git is in because it use git command to get the revision of the files.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -28,26 +28,27 @@ grunt.initConfig({
     options: {
       // Task-specific options go here.
     },
-    your_target: {
+    files: [{
       // Target-specific file lists and/or options go here.
-    },
+    }],
   },
 });
 ```
 
 ### Options
 
-#### options.separator
+#### options.repo
 Type: `String`
 Default value: `',  '`
 
-A string value that is used to do something with whatever.
+A string value that where the git repo is relate to the Gruntfile.js dir.
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+#### options.alias
+Type: `Object`
+Default value: `{}`
 
-A string value that is used to do something else with whatever else.
+Alias of modules.
+
 
 ### Usage Examples
 
@@ -73,16 +74,16 @@ grunt.initConfig({
   gemini: {
     options: {
       repo: 'tmp/',     // Src matches are relative to this path
+      alias:{
+        'aaaaaaaa':'bbbbbbb'
+      }
     },
     files: [{
       expand: true,     // Enable dynamic expansion.
       cwd: 'src',      // Src matches are relative to this path.
       src: ['**/*'], // Actual pattern(s) to match.
       dest: 'dist',   // Destination path prefix.
-      ext: '.css',
-      alias:{
-        'http://static.xiaojukeji.com/fukit/':''
-      }
+      ext: '.css'
     }]
   },
 });

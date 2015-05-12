@@ -1,7 +1,7 @@
 {
   "name": "grunt-gemini",
   "description": "A grunt gplugin got git revision",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "homepage": "https://github.com/nttdocomo/gemini",
   "author": "nttdocomo <nttdocomo.ouyi@gmail.com>",
   "repository": {

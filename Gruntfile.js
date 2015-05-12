@@ -40,16 +40,16 @@ module.exports = function(grunt) {
       custom_options: {
         options: {
           repo: 'tmp/',     // Src matches are relative to this path
+          alias:{
+            'http://static.xiaojukeji.com/fukit/':''
+          }
         },
         files: [{
           expand: true,     // Enable dynamic expansion.
           cwd: 'src',      // Src matches are relative to this path.
           src: ['**/*'], // Actual pattern(s) to match.
           dest: 'dist',   // Destination path prefix.
-          ext: '.css',
-          alias:{
-            'http://static.xiaojukeji.com/fukit/':''
-          }
+          ext: '.css'
         }]
       }
     },

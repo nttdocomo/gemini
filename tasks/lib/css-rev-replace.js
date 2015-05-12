@@ -15,7 +15,7 @@ module.exports = function (content,file,workDir,repoPath,options) {
 		if(!(/(http|ftp|https):\/\/[\w-]+(\.[\w-]*)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/.test(url))){
 			return true
 		} else {
-			for (var i in file.alias) {
+			for (var i in options.alias) {
 				//console.log(i)
 				//console.log((new RegExp('^'+i)).test(url))
 				if((new RegExp('^'+i)).test(url)){
@@ -29,8 +29,8 @@ module.exports = function (content,file,workDir,repoPath,options) {
 		url = url.match(/\burl\s*\(\s*["']?([^"'\r\n,]+)["']?\s*\)/);
 		url = url[1];
 		if(/(http|ftp|https):\/\/[\w-]+(\.[\w-]*)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/.test(url)){
-			for (var i in file.alias) {
-				var repo = file.alias[i];
+			for (var i in options.alias) {
+				var repo = options.alias[i];
 				url = url.replace(i,repo).replace(/\?.*/,'');
 				var relativePath = url.replace(/((^[a-z0-9]+\/)([a-z0-9]+\/)*).+/,'$1')
 				//console.log(relativePath)
