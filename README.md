@@ -72,12 +72,18 @@ In this example, custom options are used to do something else with whatever else
 grunt.initConfig({
   gemini: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      repo: 'tmp/',     // Src matches are relative to this path
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    files: [{
+      expand: true,     // Enable dynamic expansion.
+      cwd: 'src',      // Src matches are relative to this path.
+      src: ['**/*'], // Actual pattern(s) to match.
+      dest: 'dist',   // Destination path prefix.
+      ext: '.css',
+      alias:{
+        'http://static.xiaojukeji.com/fukit/':''
+      }
+    }]
   },
 });
 ```

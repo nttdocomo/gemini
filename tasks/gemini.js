@@ -8,9 +8,7 @@
 
 'use strict';
 
-var NodeGit = require("nodegit"),
-open = NodeGit.Repository.open,
-path = require("path"),
+var path = require("path"),
 cssRevReplace = require('./lib/css-rev-replace');
 
 module.exports = function(grunt) {
@@ -34,11 +32,7 @@ module.exports = function(grunt) {
     var workingDir = path.resolve(),repoPath = path.resolve(options.repo),
     me = this,
     done = this.async();
-    open(repoPath).then(function(repo) {
-      return repo.getCurrentBranch().then(function(reference){
-        return repo.getReferenceCommit(reference)
-      })
-    }).then(function(commit){
+    Promise.resolve().then(function(){
       return me.files.reduce(function(sequence, f){
         console.log(f.src)
         return sequence.then(function() {
@@ -62,7 +56,7 @@ module.exports = function(grunt) {
           return Promise.resolve().then(function(){
             return src.reduce(function(sequence, content){
               return sequence.then(function() {
-                return cssRevReplace(content,f,workingDir,repoPath,commit,options)
+                return cssRevReplace(content,f,workingDir,repoPath,options)
               }).then(function(chapter) {
                 // 并添加到页面
                 //console.log('It\'s saved!')

@@ -2,8 +2,9 @@ var path = require("path"),
 fs = require('fs'),
 fsWriteFile = require('./fs.writeFile'),
 fsExists = require('./fs.exists'),
+gitRev = require('./revision'),
 mkdir = require('./fs.mkdir');
-module.exports = function (content,file,workDir,repoPath,currentCommit,options) {
+module.exports = function (content,file,workDir,repoPath,options) {
 	var currentPath = file.src[0].match(/(.*)\/(.+\.(?:css))/)[1],
 	backgroundImages = content.match(/\burl\s*\(\s*["']?([^"'\r\n,]+?)["']?\s*\)/ig);
 	//console.log(currentPath)
@@ -57,11 +58,11 @@ module.exports = function (content,file,workDir,repoPath,currentCommit,options) 
 	    		// 等待当前 sequence 中所有章节和本章节的数据到达
 	    		//var path.relative(repoPath,image);
 				//从资源的绝对地址根据仓库绝对地址
-	    		return currentCommit.getEntry(path.relative(repoPath,image).replace(/\\/g,'/').replace(/(.*(.+\.(?:png|jpg|gif|eot|ttf|woff|svg))).*/,'$1')).then(function(entry){
+	    		return gitRev(image.replace(/\\/g,'/').replace(/(.*(.+\.(?:png|jpg|gif|eot|ttf|woff|svg))).*/,'$1')).then(function(sha){
 	    			//console.log(path.relative(repoPath,image) + '?t=' + entry.oid())
 	    			return {
 	    				image:image,
-	    				sha:entry.sha()
+	    				sha:sha.match(/\w{40}/)[0]
 	    			}
 	    		},function(err){
 	    			console.log(err)
